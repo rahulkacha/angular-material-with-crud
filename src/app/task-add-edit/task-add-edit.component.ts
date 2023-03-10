@@ -1,8 +1,9 @@
-import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TaskService } from '../services/task.service';
-
+import { MatDialogRef } from '@angular/material/dialog';
+import { CoreService } from '../services/core/core.service';
+import { TaskService } from '../services/task/task.service';
+import { ViewTasksComponent } from './../view-tasks/view-tasks.component';
 @Component({
   selector: 'app-task-add-edit',
   templateUrl: './task-add-edit.component.html',
@@ -14,7 +15,9 @@ export class TaskAddEditComponent {
   constructor(
     private _fb: FormBuilder,
     private _taskService: TaskService,
-    private _dialogRef: DialogRef<TaskAddEditComponent>
+    private _coreService: CoreService,
+    private _dialogRef: MatDialogRef<TaskAddEditComponent>,
+    private _viewTasksComponent: ViewTasksComponent
   ) {
     this.taskForm = this._fb.group({
       desc: '',
@@ -24,11 +27,11 @@ export class TaskAddEditComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      console.log(this.taskForm);
       this._taskService.addTask(this.taskForm.value).subscribe({
         next: (val: any) => {
-          alert('successful');
-          this._dialogRef.close();
+          this._dialogRef.close(true);
+          this._coreService.openSnackBar('task added!', 'done');
+          this._viewTasksComponent.getAllTasks();
         },
         error: (err: any) => {
           console.log(err);

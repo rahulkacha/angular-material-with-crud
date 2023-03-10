@@ -2,6 +2,7 @@
 
 # testing files
 db.json
+queries.txt
 # Compiled output
 /dist
 /tmp

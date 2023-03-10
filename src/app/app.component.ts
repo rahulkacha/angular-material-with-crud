@@ -1,8 +1,8 @@
-import { TaskService } from './services/task.service';
+import { TaskService } from './services/task/task.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TaskAddEditComponent } from './task-add-edit/task-add-edit.component';
-
+import { ViewTasksComponent } from './view-tasks/view-tasks.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +14,12 @@ export class AppComponent {
   constructor(private _dialog: MatDialog, private _tasksService: TaskService) {}
 
   openAddForm() {
-    this._dialog.open(TaskAddEditComponent);
+    const dialogRef = this._dialog.open(TaskAddEditComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+        }
+      },
+    });
   }
 }

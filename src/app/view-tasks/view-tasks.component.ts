@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TaskService } from '../services/task.service';
-import { MatDialog } from '@angular/material/dialog';
+import { TaskService } from '../services/task/task.service';
+import { CoreService } from '../services/core/core.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-view-tasks',
   templateUrl: './view-tasks.component.html',
@@ -15,15 +18,17 @@ export class ViewTasksComponent implements OnInit {
     this.getAllTasks();
   }
 
-  constructor(private _dialog: MatDialog, private _tasksService: TaskService) {}
+  constructor(
+    private _tasksService: TaskService,
+    private _coreService: CoreService
+  ) {}
 
   getAllTasks() {
     this._tasksService.getTasks().subscribe({
       next: (res) => {
-        console.log(res);
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: (err) => console.log(err),
     });
@@ -32,7 +37,8 @@ export class ViewTasksComponent implements OnInit {
   deleteTask(deleteId: number) {
     this._tasksService.deleteTask(deleteId).subscribe({
       next: (res) => {
-        console.log('successful');
+        this._coreService.openSnackBar('task deleted!', 'done');
+        this.getAllTasks();
       },
       error: (err) => console.log(err),
     });
@@ -41,7 +47,9 @@ export class ViewTasksComponent implements OnInit {
   updateTask(updateId: number) {
     this._tasksService.updateTask(updateId).subscribe({
       next: (res) => {
-        console.log('successful');
+        this._coreService.openSnackBar('task updated!', 'done');
+
+        this.getAllTasks();
       },
       error: (err) => console.log(err),
     });
@@ -57,12 +65,13 @@ export class ViewTasksComponent implements OnInit {
   }
 
   displayedColumns: string[] = [
-    'id',
-    'description',
+    'taskID',
+    'taskDesc',
     'date',
-    'action',
+    'isDone',
     'delete',
   ];
+
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
