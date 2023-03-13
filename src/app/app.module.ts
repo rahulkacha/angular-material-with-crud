@@ -24,9 +24,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 // component imports
 import { TaskAddEditComponent } from './task-add-edit/task-add-edit.component';
 import { ViewTasksComponent } from './view-tasks/view-tasks.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskAddEditComponent, ViewTasksComponent],
+  declarations: [AppComponent, TaskAddEditComponent, ViewTasksComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

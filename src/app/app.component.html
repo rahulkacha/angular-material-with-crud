@@ -1,1 +1,2 @@
-<app-view-tasks></app-view-tasks>
+<app-navbar (emitter)="send($event)"></app-navbar>
+<app-view-tasks [event]="event"></app-view-tasks>

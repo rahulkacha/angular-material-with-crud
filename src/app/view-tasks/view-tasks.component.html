@@ -1,9 +1,3 @@
-<mat-toolbar color="primary">
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddForm()">new Task</button>
-</mat-toolbar>
-x
 <div class="main-body">
   <mat-form-field>
     <mat-label>Filter</mat-label>
@@ -19,7 +13,9 @@ x
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="taskID">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let row">{{ row.taskID }}</td>
+        <td mat-cell *matCellDef="let row; let i = index">
+          {{ i + 1 }}
+        </td>
       </ng-container>
       <ng-container matColumnDef="taskDesc">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>

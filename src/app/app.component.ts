@@ -9,4 +9,9 @@ export class AppComponent {
   title = 'todolist-with-crud';
 
   constructor() {}
+
+  event = '';
+  send(keyword: any) {
+    this.event = keyword;
+  }
 }

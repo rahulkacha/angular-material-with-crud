@@ -1,7 +1,3 @@
-index
-  |
-app-root 
-  |
-app-view-tasks
+index> app-root> app-navbar | app-view-tasks
 
 //also, app-root has a button which triggers the opening of the dialog box of new task for.
