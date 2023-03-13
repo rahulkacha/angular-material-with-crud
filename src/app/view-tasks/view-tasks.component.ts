@@ -26,6 +26,7 @@ export class ViewTasksComponent implements OnInit {
     private _dialog: MatDialog
   ) {}
 
+  
   openAddForm() {
     const dialogRef = this._dialog.open(TaskAddEditComponent);
     dialogRef.afterClosed().subscribe({
