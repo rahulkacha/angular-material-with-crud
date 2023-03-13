@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from '../services/task/task.service';
 import { CoreService } from '../services/core/core.service';
+import { TaskAddEditComponent } from '../task-add-edit/task-add-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +22,20 @@ export class ViewTasksComponent implements OnInit {
 
   constructor(
     private _tasksService: TaskService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private _dialog: MatDialog
   ) {}
+
+  openAddForm() {
+    const dialogRef = this._dialog.open(TaskAddEditComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getAllTasks();
+        }
+      },
+    });
+  }
 
   getAllTasks() {
     this._tasksService.getTasks().subscribe({
@@ -29,6 +43,7 @@ export class ViewTasksComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        length = this.dataSource.data.length;
       },
       error: (err) => console.log(err),
     });
