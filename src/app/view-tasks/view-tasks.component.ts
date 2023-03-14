@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewChild,
   Input,
-  DoCheck,
+  OnChanges,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,17 +20,17 @@ import { CoreService } from '../services/core/core.service';
   templateUrl: './view-tasks.component.html',
   styleUrls: ['./view-tasks.component.css'],
 })
-export class ViewTasksComponent implements OnInit, DoCheck {
+export class ViewTasksComponent implements OnInit, OnChanges {
   @Input() event: any;
 
   ngOnInit(): void {
     this.getAllTasks();
   }
 
-  ngDoCheck(): void {
+  ngOnChanges(): void {
     if (this.event) {
-      // console.log(this.event);
       this.getAllTasks();
+      return;
     }
   }
 
