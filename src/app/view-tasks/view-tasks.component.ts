@@ -29,7 +29,8 @@ export class ViewTasksComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     if (this.event) {
-      console.log(this.event);
+      // console.log(this.event);
+      this.getAllTasks();
     }
   }
 
