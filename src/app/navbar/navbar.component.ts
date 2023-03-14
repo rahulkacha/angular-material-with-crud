@@ -11,12 +11,15 @@ export class NavbarComponent {
   @Output() emitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _dialog: MatDialog) {}
-  openAddForm(event: any) {
+
+  openAddForm(event: Event) {
     const dialogRef = this._dialog.open(TaskAddEditComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
           this.emitter.emit(event);
+
+          return;
         }
       },
     });
