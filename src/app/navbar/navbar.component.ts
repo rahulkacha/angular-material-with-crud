@@ -24,4 +24,8 @@ export class NavbarComponent {
       },
     });
   }
+
+  onLogIn() {}
+
+  onLogOut() {}
 }

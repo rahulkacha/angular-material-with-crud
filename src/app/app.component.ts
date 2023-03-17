@@ -10,8 +10,5 @@ export class AppComponent {
 
   constructor() {}
 
-  event = '';
-  send(keyword: any) {
-    this.event = keyword;
-  }
+  
 }

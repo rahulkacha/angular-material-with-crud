@@ -25,9 +25,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TaskAddEditComponent } from './task-add-edit/task-add-edit.component';
 import { ViewTasksComponent } from './view-tasks/view-tasks.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './user/login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskAddEditComponent, ViewTasksComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    TaskAddEditComponent,
+    ViewTasksComponent,
+    NavbarComponent,
+    LoginComponent,
+    NotFoundComponent,
+    HomeComponent,
+    AdminComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
