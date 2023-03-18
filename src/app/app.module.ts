@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +30,7 @@ import { LoginComponent } from './user/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,7 @@ import { AdminComponent } from './admin/admin.component';
     MatSortModule,
     MatSnackBarModule,
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
