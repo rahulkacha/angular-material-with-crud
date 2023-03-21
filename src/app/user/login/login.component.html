@@ -1,1 +1,37 @@
 <app-navbar></app-navbar>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>username</mat-label>
+        <input
+          matInput
+          placeholder="your username or email"
+          formControlName="username"
+          type="text"
+          required
+          autofocus
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>password</mat-label>
+        <input
+          matInput
+          placeholder="your password"
+          formControlName="password"
+          type="password"
+          required
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="action">
+    <button class="btn-action" mat-raised-button type="button">cancel</button>
+    <button class="btn-action" mat-raised-button color="primary" type="submit">
+      Login
+    </button>
+  </div>
+</form>

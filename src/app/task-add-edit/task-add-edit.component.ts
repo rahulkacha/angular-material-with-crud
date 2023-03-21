@@ -15,7 +15,7 @@ export class TaskAddEditComponent {
     private _fb: FormBuilder,
     private _taskService: TaskService,
     private _coreService: CoreService,
-    private _dialogRef: MatDialogRef<TaskAddEditComponent>,
+    private _dialogRef: MatDialogRef<TaskAddEditComponent>
   ) {
     this.taskForm = this._fb.group({
       desc: '',
@@ -28,7 +28,7 @@ export class TaskAddEditComponent {
       this._taskService.addTask(this.taskForm.value).subscribe({
         next: (val: any) => {
           this._dialogRef.close(true);
-          this._coreService.openSnackBar('task added!', 'done');
+          this._coreService.openSnackBar('task added!', 'done', 750);
         },
         error: (err: any) => {
           console.log(err);

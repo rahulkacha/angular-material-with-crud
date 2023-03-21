@@ -6,9 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CoreService {
   constructor(private _snackBar: MatSnackBar) {}
-  openSnackBar(message: string, action: string = 'done') {
+  openSnackBar(message: string, action: string = 'done', duration: number) {
     this._snackBar.open(message, action, {
-      duration: 750,
+      duration: duration,
       verticalPosition: 'top',
     });
   }

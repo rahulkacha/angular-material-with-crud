@@ -32,14 +32,7 @@ export class NavbarComponent {
     });
   }
 
-  onLogIn() {
-    this.authService.logIn();
-    this.coreService.openSnackBar('you are logged In!', 'success');
-    // this.router.navigate(['/admin/home']);
-  }
-
   onLogOut() {
     this.authService.logOut();
-    this.router.navigate(['/login']);
   }
 }

@@ -54,7 +54,7 @@ export class ViewTasksComponent implements OnInit, OnChanges {
   deleteTask(deleteId: number) {
     this._tasksService.deleteTask(deleteId).subscribe({
       next: (res) => {
-        this._coreService.openSnackBar('task deleted!', 'done');
+        this._coreService.openSnackBar('task deleted!', 'done', 750);
         this.getAllTasks();
       },
       error: (err) => console.log(err),
@@ -64,7 +64,7 @@ export class ViewTasksComponent implements OnInit, OnChanges {
   updateTask(updateId: number) {
     this._tasksService.updateTask(updateId).subscribe({
       next: (res) => {
-        this._coreService.openSnackBar('task updated!', 'done');
+        this._coreService.openSnackBar('task updated!', 'done', 750);
 
         this.getAllTasks();
       },

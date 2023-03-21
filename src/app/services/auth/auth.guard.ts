@@ -1,3 +1,4 @@
+// @ts-ignore
 import { CoreService } from './../core/core.service';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
@@ -30,13 +31,14 @@ export class AuthGuard implements CanActivate {
     const isLoggedIn = localStorage.getItem('isLoggedIn')
       ? localStorage.getItem('isLoggedIn')
       : false;
-    console.log(isLoggedIn);
-    console.log('type of islogin', typeof isLoggedIn);
+    const accessToken = localStorage.getItem('accessToken')
+      ? localStorage.getItem('accessToken')
+      : false;
+    //verify the token from the backend
     if (isLoggedIn === 'true') {
-      console.log();
       return true;
     } else {
-      this.coreService.openSnackBar('permission denied!', 'unauthorized');
+      this.coreService.openSnackBar('permission denied!', 'unauthorized', 750);
       this.router.navigate(['/login']);
       return false;
     }
