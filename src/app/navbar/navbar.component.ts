@@ -13,6 +13,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   @Output() emitter: EventEmitter<any> = new EventEmitter<any>();
 
+  isLoggedIn = localStorage.getItem('isLoggedIn')
+    ? localStorage.getItem('isLoggedIn')
+    : false;
+
   constructor(
     private _dialog: MatDialog,
     private authService: AuthService,

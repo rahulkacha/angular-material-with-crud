@@ -2,7 +2,12 @@
   <span>My App</span>
   <span class="example-spacer"></span>
   <button mat-raised-button (click)="onLogOut()">Log Out</button>
-  <button mat-raised-button (click)="openAddForm($event)" #keyword>
+  <button
+    *ngIf="isLoggedIn"
+    mat-raised-button
+    (click)="openAddForm($event)"
+    #keyword
+  >
     new Task
   </button>
 </mat-toolbar>

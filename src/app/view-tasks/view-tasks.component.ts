@@ -25,6 +25,12 @@ export class ViewTasksComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getAllTasks();
+    this._tasksService.testAdminOnlyRoute().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => console.log(err),
+    });
   }
 
   ngOnChanges(): void {

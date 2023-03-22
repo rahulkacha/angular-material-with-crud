@@ -2,7 +2,7 @@
 
 # testing files
 db.json
-queries.txt
+tasks.txt
 # Compiled output
 /dist
 /tmp

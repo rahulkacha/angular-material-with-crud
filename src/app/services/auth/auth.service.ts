@@ -2,6 +2,7 @@ import { CoreService } from 'src/app/services/core/core.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +18,21 @@ export class AuthService {
 
   logIn(jwt: any): void {
     this.isLoggedIn = true;
+
     // store local loggedIn state in localStorage
     this.coreService.openSnackBar('you are logged In!', 'success', 750);
-    this.router.navigate(['/admin/home']);
+    // decode the token and check the user_role and redirect to respective routes
+    const decodedJWT: any = jwt_decode(jwt.accessToken);
+    const role: number = decodedJWT.user_role;
+
+    if (role === 1) {
+      this.router.navigate(['/admin/home']);
+    } else {
+      this.router.navigate(['/user/home']);
+    }
     localStorage.setItem('isLoggedIn', String(this.isLoggedIn));
     localStorage.setItem('accessToken', jwt.accessToken);
+    localStorage.setItem('role', String(role));
   }
 
   logOut(): void {
@@ -30,14 +41,21 @@ export class AuthService {
     localStorage.setItem('isLoggedIn', String(this.isLoggedIn));
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('role');
   }
 
   getJwt(formData: any): any | JSON {
-    console.log('here');
     return this.http.post('http://localhost:5000/user/login', formData);
   }
 
   getToken() {
     return localStorage.getItem('accessToken');
+  }
+
+  getRole(): number {
+    const role: any = localStorage.getItem('role')
+      ? localStorage.getItem('role')
+      : false;
+    return +role;
   }
 }

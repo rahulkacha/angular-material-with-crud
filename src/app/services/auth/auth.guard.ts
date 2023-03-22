@@ -1,4 +1,3 @@
-// @ts-ignore
 import { CoreService } from './../core/core.service';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
@@ -20,27 +19,39 @@ export class AuthGuard implements CanActivate {
     private coreService: CoreService,
     private router: Router
   ) {}
+
   canActivate(
-    route: ActivatedRouteSnapshot,
+    next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
-    | UrlTree
-    | boolean {
+    | boolean
+    | UrlTree {
+    let url: string = state.url;
+    return this.checkUserLogin(next, url);
+  }
+
+  checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     const isLoggedIn = localStorage.getItem('isLoggedIn')
       ? localStorage.getItem('isLoggedIn')
       : false;
-    const accessToken = localStorage.getItem('accessToken')
-      ? localStorage.getItem('accessToken')
-      : false;
-    //verify the token from the backend
+
     if (isLoggedIn === 'true') {
-      return true;
-    } else {
-      this.coreService.openSnackBar('permission denied!', 'unauthorized', 750);
+      const userRole = this.authService.getRole(); //from local storage after login
+      if (route.data['role'] === 1 && userRole === 1) {
+        //for admin
+        return true;
+      } else if (route.data['role'] === 3 && userRole === 3) {
+        // for user
+        return true;
+      }
+      this.coreService.openSnackBar('unauthorized!', 'ok', 1500);
       this.router.navigate(['/login']);
       return false;
     }
+    this.coreService.openSnackBar('unauthorized!', 'ok', 1500);
+    this.router.navigate(['/login']);
+    return false;
   }
 }

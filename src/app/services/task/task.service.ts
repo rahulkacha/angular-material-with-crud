@@ -25,4 +25,12 @@ export class TaskService {
       null //null body
     );
   }
+
+  testUserOnlyRoute(): Observable<any> {
+    return this._http.get('http://localhost:5000/user/userOnly');
+  }
+
+  testAdminOnlyRoute(): Observable<any> {
+    return this._http.get('http://localhost:5000/user/getAll');
+  }
 }
