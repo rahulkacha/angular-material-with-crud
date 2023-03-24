@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   getJwt(formData: any): any | JSON {
-    return this.http.post('http://localhost:5000/user/login', formData);
+    return this.http.get('http://localhost:5000/user/login', formData);
   }
 
   getToken() {
