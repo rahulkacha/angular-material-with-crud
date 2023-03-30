@@ -34,7 +34,7 @@ export class LoginComponent {
           }
         },
         error: (err: any) => {
-          // wrong username or password 
+          // wrong username or password
           this.coreService.openSnackBar(
             'invalid username or password!',
             'ok',

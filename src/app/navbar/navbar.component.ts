@@ -1,9 +1,7 @@
-import { CoreService } from './../services/core/core.service';
 import { AuthService } from './../services/auth/auth.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TaskAddEditComponent } from '../task-add-edit/task-add-edit.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,8 +18,7 @@ export class NavbarComponent {
   constructor(
     private _dialog: MatDialog,
     private authService: AuthService,
-    private coreService: CoreService,
-    private router: Router
+
   ) {}
 
   openAddForm(event: Event) {
